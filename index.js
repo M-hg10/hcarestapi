@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const apiRoutes = require('./routes/ApikullaniciRoutes');
 const firmaRoutes = require('./routes/firmaRoutes');
 const authRoutes = require('./routes/authRoutes');
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // Route'lar
 app.use('/firmalar', firmaRoutes);
 app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 app.get('/', (req, res) => {
   res.send('Ana sayfaya hoş geldin!')
 });
