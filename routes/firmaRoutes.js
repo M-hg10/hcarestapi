@@ -1,11 +1,16 @@
-// routes/firmaRoutes.js
 const express = require('express');
 const router = express.Router();
-const firmaController = require('../controllers/firmaController');
+const auth = require('../middleware/authMiddleware');
 
-// GET /firmalar
-router.get('/', firmaController.getFirmalar);
-// GET /firmalar/:id
-router.get('/:id', firmaController.getFirmaById);
+// Bu route'a sadece admin girebilir
+router.get('/liste', auth(['admin']), (req, res) => {
+  res.json({ message: `Firma listesi - Kullanıcı: ${req.user.username}` });
+});
+
+// Bu route hem admin hem user'a açık
+router.get('/profil', auth(['admin', 'user']), (req, res) => {
+  res.json({ message: `Firma profili - Kullanıcı: ${req.user.username}` });
+});
 
 module.exports = router;
+
