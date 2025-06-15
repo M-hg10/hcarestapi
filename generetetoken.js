@@ -1,11 +1,22 @@
-const jwt = require('jsonwebtoken');
+const rp = require('request-promise');
 
-const token = jwt.sign(
-  { username: 'admin', role: 'admin' }, // payload
-  'supersecretkey',                     // .env'deki JWT_SECRET ile aynı
-  { expiresIn: '1d' }
-);
+const options = {
+  uri: 'https://rest.hggrup.com/firmalar',
+  method: 'GET',
+  headers: {
+    authorization: 'Bearer 8fe7057d-01a7-464b-8daf-56903d8b6ad8',
+    accept: 'application/json'
+  },
+  json: true, // JSON parse otomatik olsun
+  timeout: 30000,
+  gzip: true,
+  rejectUnauthorized: true,
+};
 
-console.log("JWT Token:\n");
-console.log(token);
-console.log("\nToken'ı kullanarak API'ye istek yapabilirsiniz:\n");
+rp(options)
+  .then(response => {
+    console.log('Response:', response);
+  })
+  .catch(err => {
+    console.error('Hata:', err.message);
+  });
