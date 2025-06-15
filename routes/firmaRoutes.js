@@ -4,10 +4,10 @@ const firmaController = require('../controllers/firmaController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 // Sadece giriş yapmış kullanıcılar görebilsin
-router.get('/firmalar', authMiddleware(), firmaController.getFirmalar);
+router.get('/', authMiddleware(), firmaController.getFirmalar);
 
 // Sadece admin görebilsin örneğin
-router.get('/firmalar/:id', authMiddleware(['admin']), firmaController.getFirmaById);
+router.get('/:id', authMiddleware(['admin']), firmaController.getFirmaById);
 
 module.exports = router;
 
