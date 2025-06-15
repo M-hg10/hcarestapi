@@ -19,6 +19,9 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.get('/', (req, res) => {
   res.send('Ana sayfaya hoş geldin!')
+  // API dokümantasyonu için
+  res.send('API Dokümantasyonu için');
+  res.send('İçindekiler : /firmalar, /auth, /api');
 });
 
 
