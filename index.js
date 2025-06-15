@@ -14,7 +14,11 @@ app.use(express.json());
 
 // Route'lar
 app.use('/firmalar', firmaRoutes);
-app.use('/auth', authRoutes); // Giriş route'u
+app.use('/auth', authRoutes);
+app.get('/', (req, res) => {
+  res.send('Ana sayfaya hoş geldin!')
+});
+
 
 // Başlat
 app.listen(PORT, () => {
