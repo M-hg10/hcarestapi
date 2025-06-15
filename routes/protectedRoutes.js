@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/authMiddleware');
+const auth = require('../middlewares/authMiddleware');
 
 router.get('/admin', auth(['admin']), (req, res) => {
   res.json({ message: `Merhaba admin ${req.user.username}` });

@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/authMiddleware');
+const firmaController = require('../controllers/firmaController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-// Bu route'a sadece admin girebilir
-router.get('/liste', auth(['admin']), (req, res) => {
-  res.json({ message: `Firma listesi - Kullanıcı: ${req.user.username}` });
-});
+// Sadece giriş yapmış kullanıcılar görebilsin
+router.get('/firmalar', authMiddleware(), firmaController.getFirmalar);
 
-// Bu route hem admin hem user'a açık
-router.get('/profil', auth(['admin', 'user']), (req, res) => {
-  res.json({ message: `Firma profili - Kullanıcı: ${req.user.username}` });
-});
+// Sadece admin görebilsin örneğin
+router.get('/firmalar/:id', authMiddleware(['admin']), firmaController.getFirmaById);
 
 module.exports = router;
+
 
